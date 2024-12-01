@@ -35,7 +35,7 @@ python3.pkgs.buildPythonPackage rec {
     changelog = "https://gitlab.com/Emilv2/huawei-solar/-/tags/${version}";
     maintainers = with maintainers; [ Toomoch ];
     license = licenses.agpl3Only;
-    broken = lib.versionAtLeast python3.pkgs.pymodbus "3.7.0";
+    broken = lib.versionAtLeast python3.pkgs.pymodbus.version "3.7.0";
   };
 
 }
