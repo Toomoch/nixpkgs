@@ -1,9 +1,12 @@
 {
   lib,
-  python3,
   fetchFromGitHub,
   fetchFromGitLab,
+  home-assistant-custom-components,
 }:
+let
+  python3 = home-assistant-custom-components.python3;
+in
 
 python3.pkgs.buildPythonPackage rec {
   pname = "huawei-solar";
