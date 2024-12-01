@@ -2,10 +2,10 @@
   lib,
   fetchFromGitHub,
   fetchFromGitLab,
-  home-assistant-custom-components,
+  home-assistant,
 }:
 let
-  python3 = home-assistant-custom-components.python;
+  python3 = home-assistant.python;
 in
 
 python3.pkgs.buildPythonPackage rec {
