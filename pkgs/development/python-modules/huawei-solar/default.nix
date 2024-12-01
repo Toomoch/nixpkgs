@@ -5,7 +5,7 @@
   home-assistant-custom-components,
 }:
 let
-  python3 = home-assistant-custom-components.python3;
+  python3 = home-assistant-custom-components.python;
 in
 
 python3.pkgs.buildPythonPackage rec {
