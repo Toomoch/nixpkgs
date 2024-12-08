@@ -1,14 +1,19 @@
 {
   lib,
-  fetchFromGitHub,
+  buildPythonPackage,
   fetchFromGitLab,
-  home-assistant,
+  hatchling,
+  hatch-vcs,
+  backoff,
+  pytz,
+  pymodbus,
+  pyserial-asyncio,
+  typing-extensions,
+	pytest-asyncio,
+  pytestCheckHook
 }:
-let
-  python3 = home-assistant.python;
-in
 
-python3.pkgs.buildPythonPackage rec {
+buildPythonPackage rec {
   pname = "huawei-solar";
   version = "2.3.0";
   pyproject = true;
@@ -20,16 +25,22 @@ python3.pkgs.buildPythonPackage rec {
     hash = "sha256-PcpyyEH3Ad9oyr4aPlUgxU5S/NPoIDUZj+Ncs7FXhVA=";
   };
 
-  build-system = with python3.pkgs; [
+  build-system = [
     hatchling
     hatch-vcs
   ];
-  dependencies = with python3.pkgs; [
+
+  dependencies = [
     backoff
     pytz
     pymodbus
     typing-extensions
     pyserial-asyncio
+  ];
+
+  nativeCheckInputs = [
+		pytest-asyncio
+    pytestCheckHook
   ];
 
   meta = with lib; {
@@ -38,7 +49,7 @@ python3.pkgs.buildPythonPackage rec {
     changelog = "https://gitlab.com/Emilv2/huawei-solar/-/tags/${version}";
     maintainers = with maintainers; [ Toomoch ];
     license = licenses.agpl3Only;
-    broken = lib.versionAtLeast python3.pkgs.pymodbus.version "3.7.0";
+    broken = lib.versionAtLeast pymodbus.version "3.7.0";
   };
 
 }
